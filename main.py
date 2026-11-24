@@ -18,6 +18,9 @@ ENTRY = "I deleted the users table. The ticket said 'delete the old users'. All 
 
 def main():
     assert "\n" not in ENTRY, "entry must be a single line"
+    assert ENTRY == ENTRY.strip(), "entry must not start/end with whitespace"
+    assert ENTRY.endswith("old."), "punch word must be the last word"
+    assert ENTRY.isascii(), "entry must be plain ASCII so bytes == chars"
     assert 1 <= len(ENTRY) <= 200, f"entry length {len(ENTRY)} outside 1-200 gate"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
